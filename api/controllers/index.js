@@ -2,11 +2,11 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const {User, Books} = require('../models/index');
+const {User, Book} = require('../models/index');
 const route = express.Router();
 
 const user = new User();
-const book = new Books();
+const book = new Book();
 
 route.get('^/S|/Isipho_Capstone', (req, res)=> {
     res.status(200).sendFile(path.join(__dirname, '../views/index.html'));
