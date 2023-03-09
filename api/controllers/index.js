@@ -2,11 +2,12 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const {User, Book} = require('../models/index');
+const {User, Book, Cart} = require('../models/index');
 const route = express.Router();
 
 const user = new User();
 const book = new Book();
+const cart = new Cart();
 
 route.get('^/S|/Isipho_Capstone', (req, res)=> {
     res.status(200).sendFile(path.join(__dirname, '../views/index.html'));
@@ -44,7 +45,7 @@ route.post('/book',
 bodyParser.json(), 
 (req, res)=> {
     book.addBook(req, res);
-})
+});
 
 route.put('/book/:id', 
 bodyParser.json(),
@@ -55,6 +56,17 @@ bodyParser.json(),
 route.delete('/book/:id', 
 (req, res)=> {
     book.deleteBook(req, res);
+});
+
+//Cart
+route.post('/carts', 
+bodyParser.json(), (req, res)=> {
+    cart.addCart(req, res);
+});
+
+route.get('/cart/:id',
+(req, res)=> {
+    cart.fetchCart(req, res)
 });
 
 module.exports = route;

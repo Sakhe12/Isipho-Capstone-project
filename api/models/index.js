@@ -210,9 +210,36 @@ class Book {
     }
 
 }
+//Cart 
+class Cart {
+    fetchCart(req, res) {
+    const strQry =
+    `select bookName, price, imgURL from Cart
+    inner join Books on Cart.bookID = Books.bookID
+    where Cart.UserID = ${req.params.id}
+    ;`; database.query(strQry, (err, results)=> {
+        if (err) throw err;
+        res.status(200).json({results: results})
+    })
+
+    };
+
+   addCart(req, res) {
+    const strQry =
+    `insert into Cart set ?;`;
+    database.query(strQry, [req.body],
+        (err)=> {
+            if (err) {
+                res.status(400).json({err: "Unable to add book>"})
+            }else {
+                res.status(200).json({msg: "Book successfully added to cart."});
+            }
+        })
+   } 
+}
 //Export User class
 module.exports = {
     User,
-    Book
+    Book, Cart
 }
 
