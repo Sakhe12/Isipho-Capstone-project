@@ -19,6 +19,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  min-height: 110vh;
+  background-color: #80A6AD;
 }
 
 nav {
@@ -31,7 +33,14 @@ nav a {
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+  transition: col 0.6s;
+}
+
+nav a.router-link-exact-active {
+  text-shadow: 0 0 10px #658864,
+               0 0 10px #658864,
+               0 0 10px #658864,
+               0 0 10px #658864
 }
 </style>
 

@@ -1,14 +1,16 @@
 <template lang="">
     <div>
        <products></products>
-    <router-view></router-view> 
+       <spinner></spinner>
     </div>
 </template>
 <script>
 import products from '../components/Products.vue'
+import spinner from '../components/Spinner.vue'
 export default {
     components : {
-        products
+        products,
+        spinner
     }
 }
 </script>

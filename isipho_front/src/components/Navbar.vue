@@ -1,6 +1,6 @@
 <template lang="">
     <div>
-        <nav class="navbar navbar-expand-lg bg-body-dark">
+        <nav class="navbar navbar-expand-lg bg-body-dark top">
             <div class="container-fluid">
               <a class="navbar-brand logo" href="#">Isipho: A Gift From Africa</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,6 +13,9 @@
                   </li>
                   <li class="nav-item">
                     <router-link class="txt" to="/products">Products</router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link class="txt" to="/about">About Us</router-link>
                   </li>
                   <li class="nav-item">
                     <router-link class="txt" to="/admin">admin</router-link>
@@ -35,6 +38,9 @@ export default {
 }
 </script>
 <style >
+.top {
+  background-color: #CBE4DE;
+}
     .txt {
         text-decoration: none;
     }
