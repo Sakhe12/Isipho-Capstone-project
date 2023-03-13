@@ -213,7 +213,7 @@ class Book {
 //Cart 
 class Cart {
     fetchCart(req, res) {
-    const strQry =
+    const strQry = 
     `select bookName, price, imgURL from Cart
     inner join Books on Cart.bookID = Books.bookID
     where Cart.UserID = ${req.params.id}
