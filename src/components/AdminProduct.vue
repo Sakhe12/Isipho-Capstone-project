@@ -1,4 +1,4 @@
-<template lang="">
+<template>
     <div>
         <h4 class="text-bg-info-center">Products</h4>
         <table class="table table-dark">            <thead>
@@ -17,8 +17,8 @@
                 <td>{{stock.bookName}}</td>
                 <td>{{stock.bookDescription}}</td>
                 <td>{{stock.author}}</td>
-                <td>{{stock.price}}</td>
-                <td>{{stock.}}</td>
+                <td>R{{stock.price}}</td>
+                <td><img :src="stock.imgURL" class="card-img-top" alt="" /></td>
               </tr>
             </tbody>
           </table>
@@ -33,9 +33,11 @@ export default {
     store.dispatch("fetchBooks");
     let books = computed(() => store.state.books);
     return {
+      
       books,
-    };
+    }
     },
+    name : "admin_Product"
 }
 </script>
 <style lang="">
