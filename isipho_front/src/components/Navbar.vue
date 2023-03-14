@@ -21,7 +21,7 @@
                     <router-link class="txt" to="/admin">admin</router-link>
                   </li>
                   <li class="nav-item">
-                    <router-link class="txt" to="/sign_in">Sign In / Register</router-link>
+                    <router-link class="txt" to="/login ">Sign In / Register</router-link>
                   </li>
                   <li class="nav-item">
                     <router-link class="txt" to="/userProfile">Cart</router-link>

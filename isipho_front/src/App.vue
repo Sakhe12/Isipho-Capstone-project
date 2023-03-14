@@ -1,13 +1,16 @@
 <template>
   <navbar></navbar>
   <router-view/>
+  <Footer></Footer>
 </template>
 
 <script>
 import navbar from './components/Navbar.vue'
+import Footer from './components/Footer.vue'
 export default {
   components : {
-    navbar
+    navbar,
+    Footer
   }
 }
 </script>
@@ -19,7 +22,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  min-height: 110vh;
+  /*min-height: 110vh;*/
   background-color: #80A6AD;
 }
 
