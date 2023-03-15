@@ -10,7 +10,8 @@ export default createStore({
     books: null,
     book: null,
     showSpinner: true,
-    message: null
+    message: null,
+    loggedUser: null
   },
   getters: {
   },
@@ -32,14 +33,18 @@ export default createStore({
     },
     setMessage(state, values) {
       state.message = values
-    }
+    },
+    setLoggedUser(state, values) {
+      state.message = values
+    },
   },
   actions: {
     async login(context, payload) {
-      const result = await axios.post(`${Isipho}login`, payload);
-      const {res, err} = await result.data;
-      if (res) {
-        context.commit('setUser', result);
+      const res = await axios.post(`${Isipho}login`, payload);
+      const {result, err} = await res.data;
+      if (result) {
+        context.commit('setLoggedUser', result);
+        console.log(result);
       } else{
         context.commit('setMessage', err)
       }

@@ -1,139 +1,105 @@
 <template lang="">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <form class="form" >
-                    <span class="title">Register</span>
-                    <label for="firstName" class="label">firstName</label>
-                    <input type="text" id="firstName" name="firstName" required class="input" v-model="payload.firstName">
-
-                    <label for="surname" class="label">Surname</label>
-                    <input type="text" id="surname" name="Surname" required class="input" v-model="payload.surname">
-
-                    <label for="gender" class="label">Gender</label>
-                    <input type="text" id="gender" name="Gender" required class="input" v-model="payload.gender">
-
-                    <label for="cellNumber" class="label">CellNumber</label>
-                    <input type="text" id="cellNumber" name="CellNumber" required class="input" v-model="payload.cellNumber">
-
-                    <label for="email" class="label">Email</label>
-                    <input type="email" id="email" name="email" required class="input"  v-model="payload.email">
-
-                    <label for="joinDate" class="label">Date</label>
-                    <input type="date" id="firstName" name="firstName" required class="input" v-model="payload.joinDate">
-                    
-                    <label for="password" class="label">Password</label>
-                    <input type="password" id="password" name="password" required class="input" v-model="payload.userPass">
-                    <button type="submit" class="submit" v-on:click.prevent="signUp(payload)">Register</button>
-                  </form>
+    <div>
+        <div class="login-card">
+            <div class="card-header">
+              <div class="log">Login</div>
             </div>
-            <!-- <div class="col">
-                <form class="form">
-                    <span class="title">Register</span>
-                    <label for="username" class="label">Username</label>
-                    <input type="text" id="username" name="username" required="" class="input">
-                    <label for="email" class="label">Email</label>
-                    <input type="email" id="email" name="email" required="" class="input">
-                    <label for="password" class="label">Password</label>
-                    <input type="password" id="password" name="password" required="" class="input">
-                    <button type="submit" class="submit">Register</button>
-               </form>
-            </div> -->
-        </div>
+            <form>
+              <div class="form-group">
+                <label for="username">Username:</label> 
+                <input required name="username" id="username" type="text" v-model="payload.email">
+              </div>
+              <div class="form-group">
+                <label for="password">Password:</label>
+                <input required name="password" id="password" type="password" v-model="payload.userPass">
+              </div>
+              <div class="form-group">
+                <input value="Login" class="submit" type="submit" v-on:click.prevent="login(payload)">
+              </div>
+            </form>
+          </div>
+          
     </div>
 </template>
 <script>
-import {computed} from '@vue/runtime-core'
-import { useStore } from 'vuex';
-export default {
-    setup () {
-    let payload = {
-        firstName: '',
-        surname: '',
-        gender: '',
-        cellNumber: '',
-        email: '',
-        userPass: '',
-        joinDate: '',
-    };
-    const store = useStore();
-    const signUp = (payload)=> {
-        store.dispatch("register", payload);
-        //Refresh
-        store.dispatch("fetchUsers");
-    }
-    const msg =
-    computed( ()=>store.state)
-    return {
-        payload,
-        msg,
-        signUp
 
-    }
+export default {
+data() {
+  return {
+    payload: {
+      email: '',
+      userPass: ''
+    },
+  }
 },
-name: "login_user"
+computed: {
+  loggedUser() {
+    return this.$store.state.loggedUser
+  }
+},
+methods: {
+  login() {
+    this.$store.dispatch("login", this.payload)
+  }
+},
+    name: "Login_user"
 }
 </script>
 <style scoped>
-.form {
-    max-width: 320px;
-    width: 100%;
-    background-color: #CBE4DE;
+.login-card {
+    width: 300px;
+    margin: 0 auto;
     padding: 20px;
-    box-shadow: 0px 0px 0px 4px rgba(52, 52, 53, 0.185);
-    display: flex;
-    flex-direction: column;
+    border: 1px solid #ccc;
     border-radius: 10px;
+    background-color: #e8e8e8;
+    box-shadow: 2px 2px 10px #ccc;
   }
   
-  .title {
+  .card-header {
     text-align: center;
-    font-size: 2rem;
-    margin-bottom: 20px;
-    color: #1a202c;
+    margin-bottom: 20px
   }
   
-  .label {
-    color: rgb(0, 0, 0);
-    margin-bottom: 4px;
+  .card-header .log {
+    margin: 0;
+    font-size: 24px;
+    color: black;
   }
   
-  .input {
-    padding: 10px;
-    margin-bottom: 20px;
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"], input[type="password"] {
     width: 100%;
-    font-size: 1rem;
-    color: #4a5568;
-    outline: none;
-    border: 1px solid transparent;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: 1px solid #ccc;
     border-radius: 4px;
-    transition: all 0.2s ease-in-out;
+    box-sizing: border-box;
+    transition: 0.5s;
   }
   
-  .input:focus {
-    background-color: #fff;
-    box-shadow: 0 0 0 2px #cbd5e0;
-  }
-  
-  .input:valid {
-    border: 1px solid green;
-  }
-  
-  .input:invalid {
-    border: 1px solid rgba(14, 14, 14, 0.205);
-  }
-  
-  .submit {
-    background-color: #1a202c;
-    color: #fff;
+ .submit {
+    width: 100%;
+    background-color: #333;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
     border: none;
     border-radius: 4px;
-    padding: 10px 20px;
-    font-size: 1.2rem;
     cursor: pointer;
-    transition: all 0.2s ease-in-out;
   }
-      
-      
-      
+  
+.submit:hover {
+    background-color: #ccc;
+    color: black;
+  }
+  
 </style>
