@@ -49,8 +49,7 @@ class User {
     }
     fetchUsers(req, res) {
         const strQry = 
-        `select UserID, firstName, surname, gender, Cellnumber, email, userPass, joinDate from Users;
-        `;
+        `select UserID, firstName, surname, gender, Cellnumber, email, userPass, joinDate from Users;`;
         ;
         //db
         database.query(strQry, (err, data)=>{
@@ -64,8 +63,7 @@ class User {
         `
         select UserID, firstName, surname, gender, Cellnumber, email, joinDate, cart, userRole
         FROM Users
-        WHERE UserID = ?;
-        `;
+        WHERE UserID = ?;`;
         //db
         database.query(strQry,[req.params.id], 
             (err, data)=>{
@@ -154,7 +152,7 @@ class Book {
     fetchBook(req, res) {
         const strQry = `select bookID, bookName, bookDescription, 
         author, price, category, imgURL
-        FROM Book
+        FROM Books
         WHERE BookID = ?;`;
         database.query(strQry, [req.params.id], (err, results)=> {
             if(err) throw err;
