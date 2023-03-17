@@ -20,20 +20,18 @@ export default {
 <style scoped >
 
 .flex-container {
-    background-color: #80A6AD;
     height: 95vh;
-    background-size: cover;
-    overflow-x: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 10vh;
 }
 
 .Opening {
     color: #405357;
     font-style: normal;
-    font-weight: 700;
-    font-size: 160%; 
+    font-weight: 600;
+    font-size: 120%; 
 }
 
 </style>

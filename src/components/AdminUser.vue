@@ -13,15 +13,15 @@
                 <th scope="col">Join-date</th>
               </tr>
             </thead>
-            <tbody v-for="cust in Users" :key="cust">
+            <tbody v-for="customer in users" :key="customer">
                 <tr>
-                  <td>{{cust.UserID}}</td>
-                  <td>{{cust.firstName}}</td>
-                  <td>{{cust.surname}}</td>
-                  <td>{{cust.gender}}</td>
-                  <td>{{cust.cellNumber}}</td>
-                  <td>{{cust.email}}</td>
-                  <td>{{cust.joinDate}}</td>
+                  <td>{{customer.UserID}}</td>
+                  <td>{{customer.firstName}}</td>
+                  <td>{{customer.surname}}</td>
+                  <td>{{customer.gender}}</td>
+                  <td>{{customer.cellNumber}}</td>
+                  <td>{{customer.email}}</td>
+                  <td>{{customer.joinDate}}</td>
                 </tr>
               </tbody>
             </table>
@@ -35,9 +35,9 @@ export default {
  setup() {
     const store = useStore();
     store.dispatch("fetchUsers");
-    let Users = computed(() => store.state.Users)
+    let users = computed(() => store.state.users)
     return{
-        Users,
+        users,
     }
  },
   name : "user_component"

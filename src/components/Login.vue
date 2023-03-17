@@ -2,7 +2,7 @@
     <div>
         <div class="login-card">
             <div class="card-header">
-              <div class="log">Login</div>
+              <div class="log" v-if="loggedUser">Login</div>
             </div>
             <form>
               <div class="form-group">
@@ -34,12 +34,15 @@ data() {
 },
 computed: {
   loggedUser() {
-    return this.$store.state.loggedUser
+    return this.$store.state.loggedUser;
+   
   }
 },
 methods: {
   login() {
-    this.$store.dispatch("login", this.payload)
+    this.$store.dispatch("login", this.payload);
+
+    
   }
 },
     name: "Login_user"

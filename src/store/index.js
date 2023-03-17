@@ -11,7 +11,7 @@ export default createStore({
     book: null,
     showSpinner: true,
     message: null,
-    loggedUser: null
+    loggedUser: false
   },
   getters: {
   },
@@ -21,6 +21,7 @@ export default createStore({
     },
     setUser(state, values) {
       state.user = values
+      state.loggedUser = true
     },
     setBooks(state, values) {
       state.books = values
@@ -30,12 +31,12 @@ export default createStore({
     },
     setSpinner(state, values) {
       state.showSpinner = values
-    },
+    }, 
     setMessage(state, values) {
       state.message = values
     },
     setLoggedUser(state, values) {
-      state.message = values
+      state.loggedUser = values
     },
   },
   actions: {
@@ -44,7 +45,7 @@ export default createStore({
       const {result, err} = await res.data;
       if (result) {
         context.commit('setLoggedUser', result);
-        console.log(result);
+        // console.log(result);
       } else{
         context.commit('setMessage', err)
       }
@@ -57,14 +58,14 @@ export default createStore({
       }else {
         context.commit('setMessage', err);
       }
-    },
-    async fetchUsers(context, payload) {
-      const res = await axios.get(`${Isipho}users`, payload);
-      console.log(await res.data);
-      if(res.data !== undefined) {
-        context.commit('setUsers', res.data);
+    }, 
+    async fetchUsers(context) {
+      const res = await axios.get(`${Isipho}users`);
+      let {results, err} = await res.data
+      if(results) {
+        context.commit('setUsers', results);
       }else {
-        context.commit('setUsers', res.data);
+        context.commit('setMessage', err);
       }
   }, 
     async fetchUserById(context, id) {
@@ -92,6 +93,15 @@ export default createStore({
       context.commit('setBooks', res.data.results)
     } else {
       context.commit('setBooks', res.data)
+    }
+  },
+  async fetchBook(context, id){
+    const res = await axios.get(`${Isipho}book/${id}`);
+    console.log(await res.data.results)
+    if(res.data !== undefined){
+      context.commit('setBook', res.data.results[0])
+    } else {
+      context.commit('setBook', res.data)
     }
   },
   async addBooks(context, payload){

@@ -29,6 +29,7 @@
 <script>
 import {computed} from '@vue/runtime-core'
 import { useStore } from 'vuex';
+// import { useRouter } from 'vue-router'
 export default {
     setup () {
     let payload = {
@@ -39,7 +40,13 @@ export default {
         email: '',
         userPass: '',
         joinDate: '',
+        
     };
+    // const router = useRouter();
+    // async function toHome() {
+    //   await router.push("/")
+    // }
+    // return {toHome};
     const store = useStore();
     const signUp = (payload)=> {
         store.dispatch("register", payload);
