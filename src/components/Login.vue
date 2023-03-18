@@ -39,10 +39,11 @@ computed: {
   }
 },
 methods: {
-  login() {
-    this.$store.dispatch("login", this.payload);
-
-    
+  async login() {
+    await this.$store.dispatch("login", this.payload);
+    if (this.loggedUser) {
+      alert('Logged in')
+    }
   }
 },
     name: "Login_user"

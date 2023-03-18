@@ -1,7 +1,9 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
+// import { useCookies } from 'vue3-cookies'
 
 const Isipho = "https://isipho-capstone.onrender.com/"
+// const { allowCookies } = useCookies();
 
 export default createStore({
   state: {
@@ -11,7 +13,8 @@ export default createStore({
     book: null,
     showSpinner: true,
     message: null,
-    loggedUser: false
+    loggedUser: false,
+    jwToken: null
   },
   getters: {
   },
@@ -38,13 +41,18 @@ export default createStore({
     setLoggedUser(state, values) {
       state.loggedUser = values
     },
+    setToken(state, jwToken) {
+      state.jwToken = jwToken
+    },
   },
   actions: {
     async login(context, payload) {
       const res = await axios.post(`${Isipho}login`, payload);
-      const {result, err} = await res.data;
+      const {result, err,} = await res.data;
       if (result) {
         context.commit('setLoggedUser', result);
+        // context.commit('setToken', jwToken);
+        // await allowCookies.set('setUser', jwToken)
         // console.log(result);
       } else{
         context.commit('setMessage', err)

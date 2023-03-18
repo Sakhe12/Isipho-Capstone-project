@@ -18,7 +18,7 @@
                     <router-link class="txt" to="/about">About Us</router-link>
                   </li>
                   <li class="nav-item">
-                    <router-link class="txt" to="/admin">admin</router-link>
+                    <router-link class="txt" to="/admin" v-if="admin">admin</router-link>
                   </li>
                   <li class="nav-item">
                     <router-link class="txt" to="/register ">Register</router-link>
@@ -27,7 +27,7 @@
                     <router-link class="txt" to="/login">Sign In</router-link>
                   </li>
                   <li class="nav-item">
-                    <router-link class="txt" to="/userProfile">Cart</router-link>
+                    <router-link class="txt" to="/userProfile" v-if="loggedUser">Cart</router-link>
                   </li>
                 </ul>
               </div>
@@ -37,7 +37,13 @@
 </template>
 <script>
 export default {
-    name: 'navbar_bar'
+    name: 'navbar_bar',
+    computed:{
+    loggedUser () {
+      return this.$store.state.loggedUser
+    },
+  },
+    
 }
 </script>
 <style >

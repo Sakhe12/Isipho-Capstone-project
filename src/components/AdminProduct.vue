@@ -35,11 +35,12 @@ export default {
     return {
       
       books,
-    }
+    };
+    
     },
     name : "admin_Product"
 }
 </script>
-<style lang="">
+<style scoped>
     
 </style>

@@ -14,8 +14,12 @@
           <div class="card-body">
             <h5 class="card-title">{{ book.bookName }}</h5>
             <p class="card-text">{{ book.author }}</p>
-            <p class="card-text">{{ book.price }}</p>
-            <router-link :to="{name:'product', params: {id: book.bookID} }" class="btn btn-danger">View More</router-link>
+            <p class="card-text">R{{ book.price }}</p>
+            
+              <router-link v-if="loggedUser" :to="{name:'product', params: {id: book.bookID} }" class="btn btn-danger">
+                View More
+              </router-link>
+            
     
           </div>
         </div>
@@ -27,14 +31,14 @@ import Spinner from '../components/Spinner.vue'
 import { useStore } from "vuex";
 import { computed } from "@vue/runtime-core";
 export default {
-    components : {
-        Spinner
-    },
-    created() {
-        setTimeout(() => {
-            this.loading = false
-        }, 2000)
-    },
+  components : {
+    Spinner
+  },
+  created() {
+      setTimeout(() => {
+          this.loading = false
+      }, 2000)
+  },
   setup() {
     const store = useStore();
     store.dispatch("fetchBooks");
@@ -47,6 +51,11 @@ export default {
     return {
         loading: true
     }
+  },
+  computed:{
+    loggedUser () {
+      return this.$store.state.loggedUser
+    },
   },
   name: "products_cust",
 };
