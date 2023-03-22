@@ -201,12 +201,11 @@ class Book {
         delete from Books
         where BookID = ?;
         `;
-        database.query(strQry,[req.params.BookID], (err)=> {
+        database.query(strQry,[req.params.id], (err)=> {
             if(err) res.status(400).json({err: "The record was not found."});
             res.status(200).json({msg: "A book was deleted."});
         })
     }
-
 }
 //Cart 
 class Cart {
