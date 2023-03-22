@@ -66,10 +66,10 @@ class User {
         WHERE UserID = ?;`;
         //db
         database.query(strQry,[req.params.id], 
-            (err, data)=>{
+            (err, results)=>{
             if(err) throw err;
             else res.status(200).json( 
-                {results: data} );
+                {results: results} );
         })
 
     }
