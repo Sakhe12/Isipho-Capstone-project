@@ -59,18 +59,14 @@ class User {
         })
     }
     fetchUser(req, res) {
-        const strQry = 
-        `
-        select UserID, firstName, surname, gender, Cellnumber, email, joinDate, cart, userRole
+        const strQry = `select UserID, firstName, surname, gender, Cellnumber, email, joinDate, cart, userRole
         FROM Users
         WHERE UserID = ?;`;
         //db
-        database.query(strQry,[req.params.id], 
-            (err, data)=>{
+        database.query(strQry,[req.params.id], (err, data)=>{
             if(err) throw err;
-            res.status(200).json( 
-                {results: data} );
-        })
+            res.status(200).json( {results: data} );
+        });
 
     }
     async createUser(req, res) {
@@ -122,7 +118,7 @@ class User {
             res.status(200).json( {msg: 
                 "A row was affected"} );
         })    
-    }
+    };
     deleteUser(req, res) {
         const strQry = 
         `
