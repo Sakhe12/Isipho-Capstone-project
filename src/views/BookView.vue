@@ -30,8 +30,8 @@ export default {
 <style scoped>
 .img {
     margin-top: 1vh;
-    height: 58vh;
-    width: 40%;
+    height: 100%;
+    width: 60%;
 }
-    
+
 </style>

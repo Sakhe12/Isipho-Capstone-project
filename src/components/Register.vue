@@ -23,6 +23,10 @@
                     <label for="password" class="label">Password</label>
                     <input type="password" id="password" name="password" required class="input" v-model="payload.userPass">
                     <button type="submit" class="submit" v-on:click.prevent="signUp(payload)">Register</button>
+                    <p class="text-center text-muted mt-5 mb-0">
+                      Already have an account?
+                      <a href="login" class="fw-bold text-body"><u>Login here</u></a>
+                    </p>
                   </form>
     </div>
 </template>
@@ -75,8 +79,12 @@ name: "Register_user"
     display: flex;
     flex-direction: column;
     border-radius: 10px;
+    padding-top: ;
   }
-  
+  .container {
+    padding-top: 5%;
+    padding-bottom: 10%;
+  }
   .title {
     text-align: center;
     font-size: 2rem;

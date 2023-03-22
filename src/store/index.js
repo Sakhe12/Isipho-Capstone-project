@@ -14,6 +14,7 @@ export default createStore({
     showSpinner: true,
     message: null,
     loggedUser: false,
+    admin: false,
     jwToken: null
   },
   getters: {
@@ -25,6 +26,7 @@ export default createStore({
     setUser(state, values) {
       state.user = values
       state.loggedUser = true
+      state.admin = true
     },
     setBooks(state, values) {
       state.books = values
@@ -41,6 +43,9 @@ export default createStore({
     setLoggedUser(state, values) {
       state.loggedUser = values
     },
+    setAdmin(state, values) {
+      state.admin = values
+    },
     setToken(state, jwToken) {
       state.jwToken = jwToken
     },
@@ -51,6 +56,7 @@ export default createStore({
       const {result, err,} = await res.data;
       if (result) {
         context.commit('setLoggedUser', result);
+        context.commit('setAdmin', result);
         // context.commit('setToken', jwToken);
         // await allowCookies.set('setUser', jwToken)
         // console.log(result);
@@ -77,7 +83,7 @@ export default createStore({
       }
   }, 
     async fetchUserById(context, id) {
-      const res = await axios.get(`${Isipho}users/${id}`);
+      const res = await axios.get(`${Isipho}user/${id}`);
       const {results, err} = await res.data;
       if(results) {
         context.commit('setUsers', results);
@@ -86,12 +92,23 @@ export default createStore({
       }
   },
   async updateUser(context, payload) {
-    const res = await axios.post(`${Isipho}user`, payload);
+    const res = await axios.put(`${Isipho}user`, payload);
     const {msg, err} = await res.data;
     if(msg) {
       context.commit('setUser', msg);
     }else {
       context.commit('setUser', err);
+    }
+  },
+  async deleteBook(context, id){
+    const res = await axios.delete(`${Isipho}book/${id}`);
+    const{msg, err} = await res.data;
+    if(msg){
+      context.commit('setBooks', msg[0]);
+      console.log(msg);
+      this.dispatch('fetchBooks');
+    } else {
+      context.commit('setMessage', err)
     }
   },
   async fetchBooks(context){

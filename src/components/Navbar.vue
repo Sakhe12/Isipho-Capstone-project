@@ -23,9 +23,7 @@
                   <li class="nav-item">
                     <router-link class="txt" to="/register ">Register</router-link>
                   </li>
-                  <li class="nav-item">
-                    <router-link class="txt" to="/login">Sign In</router-link>
-                  </li>
+
                   <li class="nav-item">
                     <router-link class="txt" to="/userProfile" v-if="loggedUser">Cart</router-link>
                   </li>
@@ -42,6 +40,9 @@ export default {
     loggedUser () {
       return this.$store.state.loggedUser
     },
+ admin() {
+  return this.$store.state.admin
+ }
   },
     
 }

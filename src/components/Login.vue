@@ -18,7 +18,10 @@
               </div>
             </form>
           </div>
-          
+          <p class="text-center text-muted mt-5 mb-0">
+            Don't have an account?
+            <a href="register" class="fw-bold text-body"><u>Register here</u></a>
+          </p>
     </div>
 </template>
 <script>
@@ -36,12 +39,15 @@ computed: {
   loggedUser() {
     return this.$store.state.loggedUser;
    
-  }
+  },
+ admin() {
+  return this.$store.state.admin;
+ }
 },
 methods: {
   async login() {
     await this.$store.dispatch("login", this.payload);
-    if (this.loggedUser) {
+    if (this.loggedUser, this.admin) {
       alert('Logged in')
     }
   }
