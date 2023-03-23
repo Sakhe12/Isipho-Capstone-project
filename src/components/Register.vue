@@ -18,7 +18,7 @@
                     <input type="email" id="email" name="email" required class="input"  v-model="payload.email">
 
                     <label for="joinDate" class="label">Date</label>
-                    <input type="date" id="firstName" name="firstName" required class="input" v-model="payload.joinDate">
+                    <input type="date" id="Date" name="joinDate" required class="input" v-model="payload.joinDate">
                     
                     <label for="password" class="label">Password</label>
                     <input type="password" id="password" name="password" required class="input" v-model="payload.userPass">
@@ -79,7 +79,6 @@ name: "Register_user"
     display: flex;
     flex-direction: column;
     border-radius: 10px;
-    padding-top: ;
   }
   .container {
     padding-top: 5%;

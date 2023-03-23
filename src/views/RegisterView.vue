@@ -4,7 +4,7 @@
     </div>
 </template>
 <script>
-import register from '../components/Register.vue'
+import register from '@/components/Register.vue'
 export default {
     components : {
         register

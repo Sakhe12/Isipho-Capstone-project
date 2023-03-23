@@ -23,6 +23,12 @@
                   <li class="nav-item">
                     <router-link class="txt" to="/register ">Register</router-link>
                   </li>
+                  
+                  <li class="nav-item">
+                    <router-link class="txt" to="/login ">Login</router-link>
+                  </li>
+
+
 
                   <li class="nav-item">
                     <router-link class="txt" to="/userProfile" v-if="loggedUser">Cart</router-link>

@@ -11,6 +11,8 @@
                 <th scope="col">cellNumber</th>
                 <th scope="col">email</th>
                 <th scope="col">Join-date</th>
+                <th scope="col">edit</th>
+                <th scope="col">delete</th>
               </tr>
             </thead>
             <tbody v-for="customer in users" :key="customer">
@@ -22,6 +24,8 @@
                   <td>{{customer.cellNumber}}</td>
                   <td>{{customer.email}}</td>
                   <td>{{customer.joinDate}}</td>
+                  <td></td>
+                  <td><button class="btn btn-primary" @click="$event => deleteUSer(customer.UserID)">delete</button></td>
                 </tr>
               </tbody>
             </table>
@@ -33,12 +37,17 @@ import { computed } from '@vue/runtime-core';
 
 export default {
  setup() {
-    const store = useStore();
+    const store = useStore();  
     store.dispatch("fetchUsers");
     let users = computed(() => store.state.users)
     return{
         users,
     }
+ },
+ methods: {
+  deleteUSer(id) {
+    this.$store.dispatch("deleteUser", id)
+  }
  },
   name : "user_component"
 }

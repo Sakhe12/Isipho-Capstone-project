@@ -91,6 +91,17 @@ export default createStore({
         context.commit('setMessage', err);
       }
   },
+  async deleteUser(context, id){
+    const res = await axios.delete(`${Isipho}user/${id}`);
+    const{msg, err} = await res.data;
+    if (msg) {
+      context.commit('setUsers', msg[0])
+      console.log(msg);
+      this.dispatch('fetchUsers');
+    } else {
+      context.commit('setMessage', err)
+    }
+  },
   async updateUser(context, payload) {
     const res = await axios.put(`${Isipho}user`, payload);
     const {msg, err} = await res.data;

@@ -13,7 +13,7 @@
                 <th scope="col">delete</th>
               </tr>
             </thead>
-            <tbody v-for="stock in books" :key="stock">
+            <tbody v-for="stock in books" :key="stock.bookID">
               <tr>
                 <td>{{stock.bookID}}</td>
                 <td>{{stock.bookName}}</td>
@@ -22,12 +22,12 @@
                 <td>R{{stock.price}}</td>
                 <td><img :src="stock.imgURL" class="card-img-top" alt="" /></td>
                 <td><!-- Button trigger modal -->
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  <button type="button" class="btn btn-primary"  :data-bs-target="'#EditModal'+ `${stock.bookID}`" @click="Update">
                     Edit
                   </button>
                   
                   <!-- Modal -->
-                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal fade" :id="'#EditModal' + `${stock.bookID}`" tabindex="-1" :aria-labelledby="'exampleModalLabel' + stock.bookID" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -35,6 +35,22 @@
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
+                          
+                          <form class="form" @submit.prevent="Update(stock)">
+            
+                            <input type="text" placeholder="bookName" v-model="stock.bookName">
+                
+                            <input type="text" placeholder="Description" v-model="stock.bookDescription">
+                            
+                            <input type="text" placeholder="Author" v-model="stock.author">
+                    
+                            <input type="text" placeholder="price" v-model="stock.price">
+                
+                            <input type="text" placeholder="Category" v-model="stock.category">
+                
+                            <input type="text" placeholder="Image" v-model="stock.imgURL">
+                        </form>
+
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -42,8 +58,9 @@
                         </div>
                       </div>
                     </div>
-                  </div></td>
-                <td><button @click="deleteBook(stock.bookID)">delete</button></td>
+                  </div>
+                </td>
+                <td><button class="btn btn-primary"  @click="deleteBook(stock.bookID)">delete</button></td>
               </tr>
             </tbody>
           </table>
@@ -57,10 +74,27 @@ export default {
         const store = useStore();
     store.dispatch("fetchBooks");
     let books = computed(() => store.state.books);
+    const shop = useStore();
+
+const Update = (stock)=> {
+  console.log(stock)
+  return shop.dispatch('updateBook', {
+    bookID: stock.bookID,
+    book: {
+      bookName: stock.bookName,
+      bookDescription: stock.bookDescription,
+      author: stock.author,
+      price: stock.price,
+      category: stock.category,
+      imgURL: stock.imgURL
+    }
+  })
+}
     return {
       
       books,
-    };
+      Update
+    }
     
     },
     methods: {
