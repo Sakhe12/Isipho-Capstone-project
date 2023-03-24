@@ -31,7 +31,7 @@
 
 
                   <li class="nav-item">
-                    <router-link class="txt" to="/userProfile" v-if="loggedUser">Cart</router-link>
+                    <router-link class="txt" to="/cart" v-if="loggedUser">Cart</router-link>
                   </li>
                 </ul>
               </div>

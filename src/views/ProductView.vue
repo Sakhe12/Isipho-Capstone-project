@@ -20,6 +20,7 @@
               <router-link v-if="loggedUser" :to="{name:'product', params: {id: book.bookID} }" class="btn btn-danger">
                 View More
               </router-link>
+              <button type="button" class="btn btn-danger">Danger</button>
             
     
           </div>

@@ -15,7 +15,8 @@ export default createStore({
     message: null,
     loggedUser: false,
     admin: false,
-    jwToken: null
+    jwToken: null,
+    carts: null
   },
   getters: {
   },
@@ -49,6 +50,9 @@ export default createStore({
     setToken(state, jwToken) {
       state.jwToken = jwToken
     },
+    setCarts(state, values) {
+      state.carts = values
+    }
   },
   actions: {
     async login(context, payload) {
@@ -57,6 +61,8 @@ export default createStore({
       if (result) {
         context.commit('setLoggedUser', result);
         context.commit('setAdmin', result);
+        localStorage.setItem('user', JSON.stringify(result))
+        localStorage.setItem('userID', JSON.stringify(result.UserID))
         // context.commit('setToken', jwToken);
         // await allowCookies.set('setUser', jwToken)
         // console.log(result);
@@ -147,7 +153,30 @@ export default createStore({
       context.commit('setMessage', result)
     } else {context.commit('setMessage', err);}
   },
+  async addCarts(context, payload) {
+    const res = await axios.post(`${Isipho}carts`, payload);
+    const {result, err} = await res.data;
+    if (result) {
+      context.commit('setMessage', result)
+    } else {context.commit('setMessage', err)  
+    }
   },
+
+  async fetchCarts(context) {
+    let UserID = localStorage.getItem('userID')
+    const res = await axios.get(`${Isipho}cart/${UserID}`)
+    console.log(await res.data.results)
+    if (res.data !== undefined) {
+      context.commit('setCarts', res.data.results)
+      console.log(res.data);
+    } else {
+      context.commit('setCarts', res.data)
+    }
+  }
+
+  },
+
+
   modules: {
   }
 })
