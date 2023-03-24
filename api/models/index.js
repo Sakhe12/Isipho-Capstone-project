@@ -228,7 +228,16 @@ class Cart {
                 res.status(200).json({msg: "Book successfully added to cart."});
             }
         })
-   } 
+   };
+   deleteCart(req, res) {
+    const strQry = 
+    `delete from Cart
+    where cartID = ?;`;
+    database.query(strQry, [req.params.id], (err)=> {
+        if (err) res.status(400).json({err: "Book Successfully deleted"});
+        res.status(200).json({msg: "Cart was deleted."});
+    })   
+}
 }
 //Export User class
 module.exports = {
