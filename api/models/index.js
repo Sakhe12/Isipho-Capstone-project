@@ -9,7 +9,7 @@ class User {
     login(req, res) {
         const {email, userPass} = req.body;
         const strQry =
-        `select firstName, surname, gender, Cellnumber, email, userPass, joinDate from Users where email = '${email}'`;
+        `select UserID, firstName, surname, gender, Cellnumber, email, userPass, joinDate from Users where email = '${email}'`;
         database.query(strQry, async (error, data)=>{
             if(error) throw err;
             if((!data.length) || (data == null)) {
