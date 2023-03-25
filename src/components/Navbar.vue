@@ -33,6 +33,11 @@
                   <li class="nav-item">
                     <router-link class="txt" to="/cart" v-if="loggedUser">Cart</router-link>
                   </li>
+
+                  <li class="nav-item">
+                    <router-link class="txt" to="/contact">Contact Us</router-link>
+                  </li>
+                  
                 </ul>
               </div>
             </div>

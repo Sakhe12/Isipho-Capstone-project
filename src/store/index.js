@@ -16,7 +16,8 @@ export default createStore({
     loggedUser: false,
     admin: false,
     jwToken: null,
-    carts: null
+    carts: null,
+    cart: null
   },
   getters: {
   },
@@ -52,6 +53,9 @@ export default createStore({
     },
     setCarts(state, values) {
       state.carts = values
+    },
+    setCart(state, values) {
+      state.cart = values
     }
   },
   actions: {
@@ -63,9 +67,6 @@ export default createStore({
         context.commit('setAdmin', result);
         localStorage.setItem('user', JSON.stringify(result))
         localStorage.setItem('userID', JSON.stringify(result.UserID))
-        // context.commit('setToken', jwToken);
-        // await allowCookies.set('setUser', jwToken)
-        // console.log(result);
       } else{
         context.commit('setMessage', err)
       }
@@ -152,27 +153,37 @@ export default createStore({
     if(result){
       context.commit('setMessage', result)
     } else {context.commit('setMessage', err);}
+
   },
   async addCarts(context, payload) {
-    const res = await axios.post(`${Isipho}carts`, payload);
+    const res = await axios.post(`${Isipho}user/${payload.UserID}/cart`, payload);
     const {result, err} = await res.data;
     if (result) {
-      context.commit('setMessage', result)
+      context.commit('setCart', result)
     } else {context.commit('setMessage', err)  
     }
   },
 
   async fetchCarts(context) {
-    let UserID = localStorage.getItem('userID')
-    const res = await axios.get(`${Isipho}cart/${UserID}`)
-    console.log(await res.data.results)
-    if (res.data !== undefined) {
-      context.commit('setCarts', res.data.results)
-      console.log(res.data);
-    } else {
-      context.commit('setCarts', res.data)
+    let UserID = JSON.parse(localStorage.getItem('user'))
+    const res = await axios.get(`${Isipho}user/${UserID?.UserID}/carts`);
+    const {results} = await res.data;
+    if (results) {
+      console.log("cart-results:", results);
+      context.commit('setCarts', results);  
     }
-  }
+  },
+  async deleteCart(context) {
+    let UserID = JSON.parse(localStorage.getItem('user'));
+    const res = await axios.delete(`${Isipho}user/${UserID?.UserID}/carts`)
+    const { msg,err} = await res.data
+    if (msg) {
+      console.log("delete - results:", msg)
+      context.commit('setCart', msg)
+    } else {
+      context.commit('setMessage',err)
+    }
+  },
 
   },
 

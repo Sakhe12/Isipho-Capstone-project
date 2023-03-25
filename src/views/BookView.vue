@@ -4,8 +4,10 @@
             <img :src="book?.imgURL" class="card-img-top img" alt="" />
             <p>Name: {{book?.bookName}}</p>
             <p>Book Description: {{book?.bookDescription}}</p>
+            <button @click="$event => addCarts(user, book)" type="button" class="btn btn-danger">Add To Cart</button>
+            
             <p>Price: R{{book?.price}}</p>
-            <button class="btn bg-primary"></button>
+    
         </div>
     </div>
 </template>
@@ -24,7 +26,21 @@ export default {
     mounted() {
         this.$store.dispatch('fetchBook', this.$route.params.id)
     },
+    data() {
+        return{
+            UserID: '',
+            bookID: ''
+        }
+    },
     
+    methods: {
+        addCarts: function (user, book) {
+            return this.$store.dispatch("addCarts", {
+                UserID: user?.USerID,
+                bookID: book?.bookID
+            })
+        },
+    }
 }
 </script>
 <style scoped>

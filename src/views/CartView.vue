@@ -5,7 +5,7 @@
                 <div class="col-md-8 cart">
                     <div class="title">
                         <div class="row">
-                            <div class="col"><h4><b>Shopping Cart</b></h4></div>
+                            <div class="col"><h4><b>Book Cart</b></h4></div>
                             <div class="col align-self-center text-right text-muted">3 items</div>
                         </div>
                     </div>    
@@ -50,42 +50,53 @@
     </div>
 </template>
 <script>
-import { useStore } from 'vuex';
-import { computed } from '@vue/runtime-core'
+
 export default {
-    setup () {
-        const store = useStore();
+    name: "CartView",
 
-        let payload = {
-            UserID: '',
-            bookID: '',
-        };
-        const addCart = (payload)=> {
-            store.dispatch("addCarts", payload)
-
-            store.dispatch("fetchCarts")
-        }
-        
-        async function cartSetter(carts){
-            const user = await JSON.parse(localStorage.getItem('user'))
-            store.dispatch('fetchCarts', await user.userID)
-            console.log(carts);
-            console.log(user);
-        }
-        cartSetter();
-        
-        
-        const carts = computed(()=> store.state.carts)
+    data() {
         return {
-            payload,
-            carts,
-            addCart
+            UserID: '',
+            firstName: '',
+            surname: '',
+            gender: '',
+            cellNumber: '',
+            email: '',
+            userPass: '',
+            joinDate: ''
         }
     },
+    methods: {
+        deleteCart: function (user) {
+            return this.$store.dispatch("deleteCart", {
+                UserId: user.UserID,
+            })
+        },
+    },
     computed: {
-        currentUserID() {
-            return this.$store.state.loggedUser?.UserID
+        carts: function () {
+            return this.$store.state.carts
+        },
+        user: function() {
+            return JSON.parse(localStorage.getItem("user"))
+        },
+        delivery() {
+            return 100
+        },
+        subTotal() {
+            let price = 0;
+            this.carts.forEach((book) => {
+                price += parseFloat(book.price);
+            });
+            return price
+        },
+        totalAmount() {
+            return this.subTotal + this.delivery
         }
+    },
+    created() {
+        this.$store.dispatch("fetchCarts")
+        this.$store.dispatch("fetchBooks")
     }
 }
 </script>
