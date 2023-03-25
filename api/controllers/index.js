@@ -63,17 +63,22 @@ route.delete('/book/:id',
 });
 
 //Cart
-route.post('/user/:id/carts', 
+route.post('/user/:id/cart', 
 bodyParser.json(), (req, res)=> {
     cart.addCart(req, res);
 });
 
-route.get('/cart/:id',
+route.get('/user/:id/carts',
 (req, res)=> {
     cart.fetchCart(req, res)
 });
 
-route.delete('/cart/:id',
+route.put('/user/:id/cart/:id',
+(req, res)=> {
+    cart.edit(req, res)
+})
+
+route.delete('/user/:id/cart',
 (req, res)=> {
     cart.deleteCart(req, res)
 });

@@ -207,7 +207,7 @@ class Book {
 class Cart {
     fetchCart(req, res) {
     const strQry = 
-    `select bookName, price, imgURL from Cart
+    `select UserID, bookName, price, imgURL from Cart
     inner join Books on Cart.bookID = Books.bookID
     where Cart.UserID = ${req.params.id}
     ;`; database.query(strQry, (err, results)=> {
@@ -220,7 +220,7 @@ class Cart {
    addCart(req, res) {
     const strQry =
     `insert into Cart set ?;`;
-    database.query(strQry, [req.params.id, req.body],
+    database.query(strQry, [req.body],
         (err)=> {
             if (err) {
                 res.status(400).json({err: "Unable to add book>"})
@@ -237,6 +237,20 @@ class Cart {
         if (err) res.status(400).json({err: "Book Successfully deleted"});
         res.status(200).json({msg: "Cart was deleted."});
     })   
+};
+edit(req, res) {
+    const strQry = 
+    `update Cart set 
+    where cartID = ?`;
+    database.query(strQry, [req.body, req.params.id],
+        (err)=> {
+            if(err){
+                res.status(400).json({err: "Unable to update the book"});
+            }else{
+                res.status(200).json({message:
+                "Book updated"})
+            }
+        })
 }
 }
 //Export User class
