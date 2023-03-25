@@ -220,7 +220,7 @@ class Cart {
    addCart(req, res) {
     const strQry =
     `insert into Cart set ?;`;
-    database.query(strQry, [req.body],
+    database.query(strQry, [req.params.id, req.body],
         (err)=> {
             if (err) {
                 res.status(400).json({err: "Unable to add book>"})
