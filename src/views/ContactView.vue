@@ -1,6 +1,6 @@
 <template lang="">
     <div>
-        <ContactForm></ContactForm>
+        <ContactForm>
     </div>
 </template>
 <script>

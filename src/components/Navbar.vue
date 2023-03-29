@@ -2,7 +2,7 @@
     <div>
         <nav class="navbar navbar-expand-lg bg-body-dark top">
             <div class="container-fluid">
-              <a class="navbar-brand logo" href="#">Isipho: A Gift From Africa</a>
+              <a class="navbar-brand logo" href="/">Isipho: A Gift From Africa</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -28,16 +28,14 @@
                     <router-link class="txt" to="/login ">Login</router-link>
                   </li>
 
-
-
                   <li class="nav-item">
                     <router-link class="txt" to="/cart" v-if="loggedUser">Cart</router-link>
                   </li>
 
                   <li class="nav-item">
-                    <router-link class="txt" to="/contact">Contact Us</router-link>
+                    <router-link class="txt" to="/contact">Contact</router-link>
                   </li>
-                  
+
                 </ul>
               </div>
             </div>
